@@ -13,9 +13,9 @@
 \author{
   Karline Soetaert
 }
-%\references{
-%% to be filled
-%}
+\references{
+  \url{http://www.rforscience.com/rpackages/visualisation/oceanview/}
+}
 \seealso{
   \link{db2cross}, converts a dataset from database format to cross table.
 

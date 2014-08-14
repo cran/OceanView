@@ -57,6 +57,9 @@ The Netherlands
   
   In another vignette in \pkg{OceanView}, (\code{vignette("Northsea")}) \ov is used 
   for plotting the output of a 3-D hydrodynamic model.  
+  
+  A graphical gallery using one of  \pkg{plot3D}, \pkg{plot3Drgl} or \pkg{OceanView}
+  is in \url{http://www.rforscience.com/rpackages/visualisation/oceanview/}.
 }
 
 %% The address of (at least) one author should be given
@@ -73,12 +76,12 @@ The Netherlands
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% R/Sweave specific LaTeX commands.
 %% need no \usepackage{Sweave}
 %\VignetteIndexEntry{OceanView: Visualising oceanographic data and model output}
-%\VignetteKeywords{marine science, 3-D data, 4-D data, quiver, image2D}
+%\VignetteKeyword{marine science, 3-D data, 4-D data, quiver, image2D}
 %\VignettePackage{OceanView}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Begin of the document
 \begin{document}
-\SweaveOpts{engine=R,eps=FALSE}
+\SweaveOpts{engine=R,eps=FALSE,resolution = 80}
 \SweaveOpts{keep.source=TRUE}
 
 <<preliminaries,echo=FALSE,results=hide>>=
@@ -110,7 +113,7 @@ NO3 <- db2cross(WSnioz, row = "SamplingDateTimeREAL",
          subset = (VariableName == "WNO3"), df.row = 5)
 @
 To create the image plot, the resolution is increased (\code{resfac}):
-<<label=NO3,include=FALSE, pdf = FALSE, eps = FALSE, png = TRUE, resolution = 100>>=
+<<label=NO3,include=FALSE, pdf = FALSE, eps = FALSE, png = TRUE>>=
 image2D(NO3, resfac = 3)
 @
 
@@ -208,7 +211,7 @@ The mapping to sigma-coordinates is exemplified in the \code{vignette ("Northsea
 \section{Plotting two-dimensional velocity data}
 Three functions were created to plot 2D velocity data: \code{quiver2D}, \code{flowpath} and \code{vectorplot}.
 
-<<label=flows,include=FALSE, pdf = FALSE, eps = FALSE, png = TRUE, resolution = 100>>=
+<<label=flows,include=FALSE, pdf = FALSE, eps = FALSE, png = TRUE>>=
  par(mfrow = c(2, 2))
  x  <- seq(-1, 1, by = 0.2)
  y  <- seq(-1, 1, by = 0.2)
@@ -263,7 +266,7 @@ dim(Ltrans)
 We produce a quick view of the particle geographical position and water depth of all particles, on a bathymetric map of the area. 
 We start by plotting the bathymetry, using grey scales. The color key is not drawn, but space for it is reserved (\code{plot = FALSE}).
 Then we add the particle positions using depth as the color variable.
-<<label=Chesa,include=FALSE, pdf = FALSE, eps = FALSE, png = TRUE, resolution = 100>>=
+<<label=Chesa,include=FALSE, pdf = FALSE, eps = FALSE, png = TRUE>>=
 image2D(Chesapeake$lon, Chesapeake$lat, z = Chesapeake$depth, 
   col = grey(seq(1, 0., length.out = 100)), main = "Ltrans",
   colkey = list(plot = FALSE))
@@ -289,7 +292,7 @@ either using the traditional device (slow), or using open GL (fast).
 We start by plotting the geographical position at selected time points, ignoring the depth (2-D output) using traditional graphics; the colors \code{green} and \code{orange} represent the source area of the particles.
 Note that we specify the bathymetric map of the area through the \code{image} argument of the function.
 
-<<label=Ltrans2D,include=FALSE, pdf = FALSE, eps = FALSE, png = TRUE, resolution = 100>>=
+<<label=Ltrans2D,include=FALSE, pdf = FALSE, eps = FALSE, png = TRUE>>=
 lon <- Chesapeake$lon
 lat <- Chesapeake$lat
 depth <- Chesapeake$depth
@@ -335,7 +338,7 @@ In a similar way, we can plot the temporal evolution of the 3-D positions (inclu
 We start by plotting the geographical position and the depth, i.e. 3-D output and using traditional graphics.
 Note that we specify the drawing of the bathymetry of the area through the \code{surf} argument of the function (see e.g. \code{?persp3D} for its arguments).
 
-<<label=Ltrans3D,include=FALSE, pdf = FALSE, eps = FALSE, png = TRUE, resolution = 100>>=
+<<label=Ltrans3D,include=FALSE, pdf = FALSE, eps = FALSE, png = TRUE>>=
 lon <- Chesapeake$lon
 lat <- Chesapeake$lat
 depth <- Chesapeake$depth

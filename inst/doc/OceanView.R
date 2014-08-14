@@ -10,13 +10,13 @@ library(OceanView)
 
 
 ###################################################
-### code chunk number 2: OceanView.rnw:101-102
+### code chunk number 2: OceanView.rnw:104-105
 ###################################################
 head (WSnioz, n = 2)
 
 
 ###################################################
-### code chunk number 3: OceanView.rnw:107-110
+### code chunk number 3: OceanView.rnw:110-113
 ###################################################
 NO3 <- db2cross(WSnioz, row = "SamplingDateTimeREAL", 
          col = "Station", val = "DataValue", 
@@ -36,7 +36,7 @@ image2D(NO3, resfac = 3)
 
 
 ###################################################
-### code chunk number 6: OceanView.rnw:134-136
+### code chunk number 6: OceanView.rnw:137-139
 ###################################################
  head(WSnioz.table, n = 2)
  Msummary(WSnioz.table)
@@ -75,20 +75,20 @@ image2D(NO3, resfac = 3)
 
 
 ###################################################
-### code chunk number 11: OceanView.rnw:193-194
+### code chunk number 11: OceanView.rnw:196-197
 ###################################################
 changeres(var = volcano, x = 1:nrow(volcano), y = 1:ncol(volcano), resfac = 0.1)
 
 
 ###################################################
-### code chunk number 12: OceanView.rnw:197-199
+### code chunk number 12: OceanView.rnw:200-202
 ###################################################
 remap(var = volcano, x = 1:nrow(volcano), y = 1:ncol(volcano), 
   xto = c(1, 20, 40), yto = c(2, 5))
 
 
 ###################################################
-### code chunk number 13: OceanView.rnw:202-204
+### code chunk number 13: OceanView.rnw:205-207
 ###################################################
 extract(volcano, x = 1:nrow(volcano), y = 1:ncol(volcano),
   xyto = cbind(c(2, 5), c(5, 10)))
@@ -163,7 +163,7 @@ extract(volcano, x = 1:nrow(volcano), y = 1:ncol(volcano),
 
 
 ###################################################
-### code chunk number 16: OceanView.rnw:260-261
+### code chunk number 16: OceanView.rnw:263-264
 ###################################################
 dim(Ltrans)
 
