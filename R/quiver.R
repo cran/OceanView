@@ -6,7 +6,7 @@
 ## =============================================================================
 
 checkinput <- function(u, v, x = NULL, y = NULL, scale = 1, by = 1, 
-  xlim = NULL, ylim = NULL, maxspeed = NULL) {  
+  xlim = NULL, ylim = NULL, maxspeed = NULL, Log = FALSE) {  
   
   if (is.null(x)) 
     x <- seq(0, 1, length.out = nrow(u))
@@ -105,6 +105,7 @@ checkinput <- function(u, v, x = NULL, y = NULL, scale = 1, by = 1,
 # size of the arrows
 # ------------------------------------------------------------------------------    
   speed <- sqrt(u^2 + v^2)
+  
   if (is.null(maxspeed))
     maxspeed <- max(speed) 
   else {
@@ -121,6 +122,8 @@ checkinput <- function(u, v, x = NULL, y = NULL, scale = 1, by = 1,
     u <- u * scale / maxspeed * xr 
     v <- v * scale / maxspeed * yr 
   }
+  if (Log) speed <- log(speed)
+  if (Log) maxspeed <- log(maxspeed)
   list(x = x, y = y, u = u, v = v, 
        speed = speed, maxspeed = maxspeed, 
        isna = isna, ix = ix, iy = iy)
@@ -252,8 +255,19 @@ quiver2D.matrix  <- function(u, v, x = NULL, y = NULL, colvar = NULL, ...,
       add <- TRUE
     }
   } # plot
+  # karline: log of arrows log = "a""
+  Log <- FALSE
+  if (! is.null(dm$log)) {
+    if (length(grep("a", dm[["log"]])) > 0) {
+      dm[["log"]] <- gsub("a", "", dm[["log"]])
+      Log <- TRUE
+      if (dm[["log"]] == "")
+        dm[["log"]] <- NULL
+    }
+  }
+
   MM <- checkinput(u, v, x, y, scale, by = by, xlim = dm$xlim, 
-    ylim = dm$ylim, maxspeed = speed.max) 
+    ylim = dm$ylim, maxspeed = speed.max, Log) 
 
   x <- MM$x
   y <- MM$y
@@ -264,6 +278,7 @@ quiver2D.matrix  <- function(u, v, x = NULL, y = NULL, colvar = NULL, ...,
   yto <- y + v
 
  # transpose dp elements that are matrices
+  
   dp <- lapply(dp, FUN = function(x) 
                     if (is.matrix(x)) x[MM$ix, MM$iy] else x)
   
@@ -293,6 +308,8 @@ quiver2D.matrix  <- function(u, v, x = NULL, y = NULL, colvar = NULL, ...,
     par(mar = par("mar")) 
 
   } #plot
+  if (Log) MM$maxspeed <- exp(MM$maxspeed)
+    
   invisible(list(x0 = x, y0 = y, x1 = xto, y1 = yto, col = Col, length = dp$length, 
     speed.max = MM$maxspeed))
 }
