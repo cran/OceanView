@@ -6,7 +6,8 @@
 ## =============================================================================
 
 checkinput <- function(u, v, x = NULL, y = NULL, scale = 1, by = 1, 
-  xlim = NULL, ylim = NULL, maxspeed = NULL, Log = FALSE) {  
+  xlim = NULL, ylim = NULL, maxspeed = NULL, Log = FALSE, plist = NULL, 
+  add = FALSE) {  
   
   if (is.null(x)) 
     x <- seq(0, 1, length.out = nrow(u))
@@ -115,16 +116,27 @@ checkinput <- function(u, v, x = NULL, y = NULL, scale = 1, by = 1,
   }  
   if (maxspeed == 0) 
     maxspeed <- 1e-16
+  if (!is.null(plist$quiver)) {
+    xr <- plist$quiver$xr
+    yr <- plist$quiver$yr
+    maxspeed <- plist$quiver$maxspeed
+    if (Log) maxspeed <- exp(maxspeed)
+  } else if (add) {
+    pusr <- par("usr")
+    xr <- diff (pusr[1:2]) / max(dim(u))
+    yr <- diff (pusr[3:4]) / max(dim(u))
+  
+  } else {
   xr <- diff (range(x)) / max(dim(u))
   yr <- diff (range(y)) / max(dim(u))
-
+  }
   if (!is.null(scale)) {
     u <- u * scale / maxspeed * xr 
     v <- v * scale / maxspeed * yr 
   }
   if (Log) speed <- log(speed)
   if (Log) maxspeed <- log(maxspeed)
-  list(x = x, y = y, u = u, v = v, 
+  list(x = x, y = y, u = u, v = v, xr = xr, yr = yr,
        speed = speed, maxspeed = maxspeed, 
        isna = isna, ix = ix, iy = iy)
 }
@@ -267,8 +279,7 @@ quiver2D.matrix  <- function(u, v, x = NULL, y = NULL, colvar = NULL, ...,
   }
 
   MM <- checkinput(u, v, x, y, scale, by = by, xlim = dm$xlim, 
-    ylim = dm$ylim, maxspeed = speed.max, Log) 
-
+    ylim = dm$ylim, maxspeed = speed.max, Log, plist, add) 
   x <- MM$x
   y <- MM$y
   u <- MM$u
@@ -309,6 +320,11 @@ quiver2D.matrix  <- function(u, v, x = NULL, y = NULL, colvar = NULL, ...,
 
   } #plot
   if (Log) MM$maxspeed <- exp(MM$maxspeed)
+  if (! add) {
+    plist <- getplist()
+    plist$quiver <- list(xr = MM$xr, yr = MM$yr, maxspeed = MM$maxspeed)
+    setplist(plist)
+  }
     
   invisible(list(x0 = x, y0 = y, x1 = xto, y1 = yto, col = Col, length = dp$length, 
     speed.max = MM$maxspeed))

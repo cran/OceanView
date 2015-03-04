@@ -76,7 +76,11 @@ The Netherlands
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% R/Sweave specific LaTeX commands.
 %% need no \usepackage{Sweave}
 %\VignetteIndexEntry{OceanView: Visualising oceanographic data and model output}
-%\VignetteKeyword{marine science, 3-D data, 4-D data, quiver, image2D}
+%\VignetteKeyword{marine science}
+%\VignetteKeyword{3-D data}
+%\VignetteKeyword{4-D data}
+%\VignetteKeyword{quiver}
+%\VignetteKeyword{image2D}
 %\VignettePackage{OceanView}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Begin of the document

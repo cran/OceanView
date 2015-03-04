@@ -154,7 +154,8 @@ flowpath(u, v, x = NULL, y = NULL, startx = NULL, starty = NULL, ...,
     see \link{par}(ask) and \link{dev.interactive}.
     }
   \item{add }{If \code{TRUE}, will add to current plot. 
-    Else will start a new plot. 
+    Else will start a new plot. Note: to use this in a consistent way, the 
+    previous plot should have been done with one of the \code{plot3D} functions.
     }
   \item{mask }{A \code{matrix} or \code{list} defining the grid cells outside 
     the domain as \code{NA}.  
@@ -248,13 +249,13 @@ flowpath(u, v, x = NULL, y = NULL, startx = NULL, starty = NULL, ...,
           numarr = 2, add = TRUE)
 
 ## =======================================================================
-##  EXAMPLE 2: 
+##  EXAMPLE 2: note: has changed in version 1.0.3 - uses contour2D!
 ## =======================================================================
  par(mfrow = c(1, 1))
  x <- seq(-2, 2, by = 0.2)
  y <- seq(-1, 1, by = 0.2)
  z <- outer (x, y, function(x, y) x^3 - 3*x -2*y^2)
- contour(x, y, z, col = jet.col(10))
+ contour2D(x, y, z = z, col = jet.col(10))
 
 # gradients in x- and y-direction (analytical)
  dX <- outer(x, y, function(x,y) 3*x^2 - 3)
@@ -399,8 +400,27 @@ flowpath(u, v, x = NULL, y = NULL, startx = NULL, starty = NULL, ...,
   )
 
 
+
+## =============================================================================
+## Adding quivers ...
+## =============================================================================
+x <- 1:2
+y <- 1:3
+u <- matrix(1:6,2,3)
+v <- matrix(6:1,2,3)
+ par(mfrow = c(1, 1))
+
+A <- quiver2D(x = x, y = y, u = u, v = v)
+B <- quiver2D(x = x, y = y[-1], u = u[,-1], v = v[,-1], col = 2, add = TRUE)
+C <- quiver2D(x = x, y = y[-3], u = u[,-3], v = v[,-3], col = 3, add = TRUE)
+
 # restore parameter settings
  par(mfrow = pm)
+}
+\note{
+There was a slight error in the scaling of the arrows in versions previous to
+1.0.3, which has been corrected. See last example.
+
 }
 \keyword{ hplot }
 
