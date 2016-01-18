@@ -8,7 +8,7 @@
 }
 \usage{
 vectorplot(u, v, x = 0, y = 0, colvar = NULL, ...,
-           col = NULL, NAcol = "white", colkey = NULL, 
+           col = NULL, NAcol = "white", breaks = NULL, colkey = NULL,
            by = 1, arr = FALSE, xfac = NULL, 
            clim = NULL, clab = NULL, add = FALSE) 
 }
@@ -38,7 +38,11 @@ vectorplot(u, v, x = 0, y = 0, colvar = NULL, ...,
     }
   \item{NAcol }{Colors to be used for \code{colvar} values that are \code{NA}.
     }
- \item{colkey }{A logical, \code{NULL} (default), or a \code{list} with parameters 
+  \item{breaks }{a set of finite numeric breakpoints for the colors;
+    must have one more breakpoint than color and be in increasing order.
+    Unsorted vectors will be sorted, with a warning.
+    }
+  \item{colkey }{A logical, \code{NULL} (default), or a \code{list} with parameters
     for the color key (legend). List parameters should be one of 
     \code{side, plot, length, width, dist, shift, addlines, col.clab, cex.clab,
       side.clab, line.clab, adj.clab, font.clab}

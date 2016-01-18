@@ -100,16 +100,38 @@ Approx <- function(x, y, xout, ...) {
 ## =============================================================================
 ## =============================================================================
 
+check.breaks <- function (breaks, col) {
+  if (! is.null(breaks)) {
+     nbreaks <- length(breaks)
+     if (length(col) != nbreaks-1)
+       stop("must have one more break than col - suggest to use jet.col(", nbreaks-1, ")")
+
+  if (any(!is.finite(breaks)))
+            stop("'breaks' must all be finite")
+  if (is.unsorted(breaks)) {
+            warning("unsorted 'breaks' will be sorted before use")
+            breaks <- sort(breaks)
+         }
+  }
+  return(breaks)
+}
+
 ## =============================================================================
 ## Generates color vector based on variable values
 ## =============================================================================
 
-variablecol <- function(colvar, col, NAcol, clim) {
+variablecol <- function(colvar, col, NAcol, clim, breaks) {
  
-  ncol <- length(col)
-  rn <- clim[2] - clim[1]
-  ifelse (rn != 0, Col <- col[1 + trunc((colvar - clim[1])/rn * 
+  if (is.null(breaks)) {
+   ncol <- length(col)
+   rn <- clim[2] - clim[1]
+   ifelse (rn != 0, Col <- col[1 + trunc((colvar - clim[1])/rn *
       (ncol - 1))], Col <- rep(col[1], ncol))
+  } else {
+      zi <- .bincode(colvar, breaks, TRUE, TRUE)
+      Col <- col[zi]
+  }
+
   Col[is.na(Col)] <- NAcol
   return(Col)
 }

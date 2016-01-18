@@ -10,7 +10,7 @@
 ## =============================================================================
 
 tracers3D <- function(x, y, z, colvar = NULL, ..., 
-    col = NULL, NAcol = "white",
+    col = NULL, NAcol = "white", breaks = NULL,
     colkey = FALSE, clim = NULL, clab = NULL, surf = NULL) {
 
   if (!is.null(surf))  {
@@ -40,7 +40,7 @@ tracers3D <- function(x, y, z, colvar = NULL, ...,
   
   setplist(plist)
   do.call("points3D", c(alist(x, y, z, colvar = colvar, 
-    col = col, NAcol = NAcol, clim = clim, clab = clab, 
+    col = col, NAcol = NAcol, breaks = breaks, clim = clim, clab = clab,
     add = TRUE, plot = FALSE, colkey = colkey), dots))
   plotdev()
 }
@@ -50,7 +50,8 @@ tracers3D <- function(x, y, z, colvar = NULL, ...,
 ## =============================================================================
 
 tracers3Drgl <- function(x, y, z, colvar = NULL, ..., 
-  col = NULL, NAcol = "white", clim = NULL) {
+  col = NULL, NAcol = "white", breaks = NULL,
+  colkey = FALSE, clim = NULL, clab = NULL) {
 
   x <- as.vector(x)
   y <- as.vector(y)
@@ -69,6 +70,7 @@ tracers3Drgl <- function(x, y, z, colvar = NULL, ...,
 
   if (is.null(col))
     col <- "black"
+  breaks <- check.breaks(breaks, col)
 
   # colors and color variable
   if (! is.null(colvar)) {
@@ -78,7 +80,7 @@ tracers3Drgl <- function(x, y, z, colvar = NULL, ...,
     if (is.null(clim)) 
       clim <- range(colvar, na.rm = TRUE)
     
-    Col <- variablecol(colvar, col, NAcol, clim) # generate color scheme
+    Col <- variablecol(colvar, col, NAcol, clim, breaks) # generate color scheme
 
   } else {
     Col <- col

@@ -15,8 +15,9 @@ FindInterval <- function(x, vec, ...) {
 
 movieslice3D <- function(x, y, z, colvar = NULL, xs = NULL,
   ys = NULL, zs = NULL, along = NULL, col = jet.col(100), NAcol = "white",
-  clim = NULL, wait  = NULL, ask = FALSE, add = FALSE, basename = NULL,
-  ...) {
+  breaks = NULL, colkey = FALSE, clim = NULL, clab = NULL,
+  wait  = NULL, ask = FALSE, add = FALSE,
+  basename = NULL, ...) {
 
   dots <- list(...)
   Lengths <- c(length(xs), length(ys), length(zs))
@@ -41,12 +42,7 @@ movieslice3D <- function(x, y, z, colvar = NULL, xs = NULL,
   cmin <- min(clim)
   N      <- length(col) -1
 
-  # the colors, 1.000..1 to avoid that trunc(1) = 0  
-  Col <- colvar
-  Col[is.na(Col)] <- cmin
-  Col[] <- col[1 + trunc((Col - cmin)/crange*1.00000000001*N)]
-  Col[is.na(colvar)] <- NAcol
-  
+
 #  if (! add)
   xsN <- xs
   ysN <- ys
@@ -59,11 +55,22 @@ movieslice3D <- function(x, y, z, colvar = NULL, xs = NULL,
     zsN <- NULL
 
   do.call("slice3Drgl", c(alist(x, y, z, colvar, xs = xsN, ys = ysN, zs = zsN, 
-     add = add, clim = clim), dots))
+     add = add, clim = clim, col = col, NAcol = NAcol, breaks = breaks,
+     colkey = colkey, clab = clab), dots))
+
+  # the colors, 1.000..1 to avoid that trunc(1) = 0
+  Col <- colvar
+  if (is.null(breaks))  {
+    Col[is.na(Col)] <- cmin
+    Col[] <- col[1 + trunc((Col - cmin)/crange*1.00000000001*N)]
+  } else {
+    zi <- .bincode(colvar, breaks, TRUE, TRUE)
+    Col[] <- col[zi]
+  }
+  Col[is.na(colvar)] <- NAcol
 
   popit <- FALSE
-
-  if (!interactive()) 
+  if (!interactive())
     ask  <- FALSE
     
  # if main is passed...
@@ -143,8 +150,8 @@ movieslice3D <- function(x, y, z, colvar = NULL, xs = NULL,
 
 
 moviepoints3D <- function(x, y, z, colvar, t, by = 1, 
-  col = jet.col(100), NAcol = "white",
-  clim = NULL, wait  = NULL, ask = FALSE, 
+  col = jet.col(100), NAcol = "white", breaks = NULL,
+  clim = NULL, wait  = NULL, ask = FALSE,
   add = FALSE, basename = NULL, ...) {
 
     x <- as.vector(x)
@@ -160,12 +167,14 @@ moviepoints3D <- function(x, y, z, colvar, t, by = 1,
     dots <- list(...)
     if (is.null(col)) 
         col <- "black"
+    breaks <- check.breaks(breaks, col)
+
     if (!is.null(colvar)) {
         if (length(colvar) != len) 
             stop("dimension of 'colvar' should be equal to dimension of 'x', 'y' and 'z'")
         if (is.null(clim)) 
             clim <- range(colvar, na.rm = TRUE)
-        Col <- variablecol(colvar, col, NAcol, clim)
+        Col <- variablecol(colvar, col, NAcol, clim, breaks)
     }
     else {
         Col <- col

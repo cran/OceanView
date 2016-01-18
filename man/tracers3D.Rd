@@ -21,15 +21,16 @@
 }
 \usage{
   tracers3D (x, y, z, colvar = NULL, ..., 
-      col = NULL, NAcol = "white", 
+      col = NULL, NAcol = "white", breaks = NULL,
       colkey = FALSE, clim = NULL, clab = NULL, surf = NULL) 
 
   tracers3Drgl (x, y, z, colvar = NULL, ..., 
-      col = NULL, NAcol = "white", clim = NULL) 
+      col = NULL, NAcol = "white", breaks = NULL,
+      colkey = FALSE, clim = NULL, clab = NULL)
 
   moviepoints3D (x, y, z, colvar, t, by = 1, 
-    col = jet.col(100), NAcol = "white", clim = NULL, 
-    wait  = NULL, ask = FALSE, add = FALSE, 
+    col = jet.col(100), NAcol = "white", breaks = NULL,
+    clim = NULL, wait  = NULL, ask = FALSE, add = FALSE,
     basename = NULL, ...) 
 }
 
@@ -58,7 +59,11 @@
     }
   \item{NAcol }{Colors to be used for \code{colvar} values that are \code{NA}.
     }
- \item{colkey }{A logical, \code{NULL} (default), or a \code{list} with parameters 
+  \item{breaks }{a set of finite numeric breakpoints for the colors;
+    must have one more breakpoint than color and be in increasing order.
+    Unsorted vectors will be sorted, with a warning.
+    }
+ \item{colkey }{A logical, \code{NULL} (default), or a \code{list} with parameters
     for the color key (legend). List parameters should be one of 
     \code{side, plot, length, width, dist, shift, addlines, col.clab, cex.clab,
       side.clab, line.clab, adj.clab, font.clab}

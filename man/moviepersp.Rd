@@ -1,31 +1,33 @@
-\name{Moving slices in 3D}
-\alias{movieslice3D}
+\name{Moving surfaces in 3D}
+\alias{moviepersp3D}
 \title{
- Plotting volumetric data as moving slices in 3D using rgl
+ Plotting moving surfaces in 3D using rgl
 }
 \description{
-  \code{movieslice3D} plots 3D volumetric data as slices moving in one direction
-    in open-GL graphics. 
-  
-  It is based on the \code{plot3Drgl} function \link{slice3Drgl}.
+  \code{moviepersp3D} plots moving perspective plots of a surface in open-GL.
+
+  It is based on the \code{plot3Drgl} function \link{persp3Drgl}.
 }
 \usage{
-movieslice3D (x, y, z, colvar = NULL, xs = NULL,
-  ys = NULL, zs = NULL, along = NULL,
+moviepersp3D (z, x = NULL, y = NULL, t = NULL, colvar = z, tdim = 1,
   col = jet.col(100), NAcol = "white", breaks = NULL,
   colkey = FALSE, clim = NULL, clab = NULL,
-  wait  = NULL, ask = FALSE, add = FALSE, basename = NULL, ...)
+  wait  = NULL, ask = FALSE, add = FALSE, basename = NULL, ... )
 }
 
 \arguments{
-  \item{x, y, z }{Vectors with x, y and z-values. 
-    They should be of length equal to the first, second and 
-    third dimension of \code{colvar} respectively.
+  \item{x, y, t }{Vectors with x, y and t-values.
+    Their position in the z-array depends on \code{tdim}.
     }
-  \item{colvar }{The variable used for coloring. 
-    It should be an array of dimension equal to 
-    \code{c(length(x), length(y), length(z))}.
-    It must be present.
+  \item{z }{Three-dimensional array with the z-values to be plotted.
+    }
+  \item{tdim }{Index to where the \code{time} variable (over which the plot will loop)
+    is to be found in \code{z} and \code{colvar}. The default is the first position,
+    so that \code{z} and \code{colvar} are of dimension \code{(length(t), length(x), (length(y)}.
+    }
+  \item{colvar }{The variable used for coloring.
+    It should be an array of dimension equal to the dimension of \code{z}.
+    It need not be present.
     }
   \item{col }{Colors to be used for coloring the \code{colvar} variable. 
     If \code{col} is \code{NULL} 
@@ -33,7 +35,7 @@ movieslice3D (x, y, z, colvar = NULL, xs = NULL,
     }
   \item{NAcol }{Colors to be used for \code{colvar} values that are \code{NA}.
     }
-  \item{breaks }{a set of finite numeric breakpoints for the colors;
+  \item{breaks }{A set of finite numeric breakpoints for the colors;
     must have one more breakpoint than color and be in increasing order.
     Unsorted vectors will be sorted, with a warning.
     }
@@ -54,13 +56,6 @@ movieslice3D (x, y, z, colvar = NULL, xs = NULL,
      To lower it, \code{clab} can be made a vector, with the first values empty
      strings.
     }
-  \item{xs, ys, zs }{Vectors specify the positions in x, y or z where the slices (planes) are to be drawn consecutively.
-    The movie will loop over the slices, each time projecting the values of \code{colvar} on them.
-    If all \code{xs, ys, zs} are \code{NULL}, then \code{xs} will be taken equal to \code{x}.
-    } 
-  \item{along }{A number 1, 2, 3 denoting the dimension over which the slices are to be moved. 
-    If \code{NULL}, then the dimension will be the one corresponding to the longest vector \code{xs, ys, zs}. 
-    }     
   \item{add }{Logical. If \code{TRUE}, then the slices will be added to the current plot.
     If \code{FALSE} a new plot is started. 
     }     
@@ -71,8 +66,8 @@ movieslice3D (x, y, z, colvar = NULL, xs = NULL,
     }     
   \item{basename }{The base name of a \code{png} file to be produced for each movieframe. 
     }     
-  \item{\dots}{additional arguments passed to \link{slice3D} from package 
-    \code{plot3D} or to \code{plotrgl} from package \code{plot3Drgl}.
+  \item{\dots}{additional arguments passed to \link{persp3Drgl} from package
+    \code{plot3Drgl}.
     }
 }
 
@@ -80,19 +75,27 @@ movieslice3D (x, y, z, colvar = NULL, xs = NULL,
   returns nothing
 }
 \seealso{
-  \link{Sylt3D} for a data set that can be displayed with \code{movieslice3D}
+  \link{Sylt3D} for a data set that can be displayed with \code{moviepersp3D}
   
   \link{moviepoints3D} for plotting moving points in 3D
+
+  \link{movieslice3D} for plotting moving slices in 3D
 }
 
 \author{Karline Soetaert <karline.soetaert@nioz.nl>}
 
 \examples{
- x <- y <- z <- seq(-1, 1, by = 0.1)
- grid   <- mesh(x, y, z)
- colvar <- with(grid, x*exp(-x^2 - y^2 - z^2))
+ x <- y <- t <- seq(-1, 1, by = 0.1)
+ grid   <- mesh(x, y, t)
+ z <- with(grid, x*exp(-x^2 - y^2 - z^2))
 
- movieslice3D  (x, y, z, colvar = colvar, ticktype = "detailed")
+ moviepersp3D  (x, y, z = z, colvar = z, colkey = TRUE,
+   ticktype = "detailed", wait = 0.1, main = "t = ")
+
+\dontrun{
+ moviepersp3D (x, y, z = z, colvar = z, colkey = TRUE,
+   aspect = TRUE, bty = "n", ask = FALSE, main = "t = ")
+}
 
 }
 \keyword{ hplot }

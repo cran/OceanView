@@ -17,8 +17,9 @@ tracers2D(x, y, colvar = NULL, ...,
           mask = NULL, image = FALSE, contour = FALSE, 
           clim = NULL, clab = NULL) 
 
-tracers2Drgl(x, y, colvar = NULL, ..., 
-          col = NULL, NAcol = "white", clim = NULL) 
+tracers2Drgl(x, y, colvar = NULL, ...,
+          col = NULL, NAcol = "white", breaks = NULL,
+          colkey = FALSE, clim = NULL, clab = NULL) 
 }
 
 \arguments{
@@ -40,6 +41,10 @@ tracers2Drgl(x, y, colvar = NULL, ...,
     \code{col} will be "black". 
     }
   \item{NAcol }{Colors to be used for \code{colvar} values that are \code{NA}.
+    }
+  \item{breaks }{a set of finite numeric breakpoints for the colors;
+    must have one more breakpoint than color and be in increasing order.
+    Unsorted vectors will be sorted, with a warning.
     }
  \item{colkey }{A logical, \code{NULL} (default), or a \code{list} with parameters 
     for the color key (legend). List parameters should be one of 

@@ -151,7 +151,7 @@ quiver2D.default <- function (u, ...) quiver2D.matrix(u, ...)
 quiver2D.matrix  <- function(u, v, x = NULL, y = NULL, colvar = NULL, ..., 
                     scale = 1, arr.max = 0.2, arr.min = 0, speed.max = NULL,
                     by = NULL, type = "triangle", 
-                    col = NULL, NAcol = "white", colkey = NULL, 
+                    col = NULL, NAcol = "white", breaks = NULL, colkey = NULL,
                     mask = NULL, image = FALSE, contour = FALSE, 
                     clim = NULL, clab = NULL, add = FALSE, plot = TRUE)  {
 # ------------------------------------------------------------------------------
@@ -205,7 +205,7 @@ quiver2D.matrix  <- function(u, v, x = NULL, y = NULL, colvar = NULL, ...,
     if (is.null(clim)) 
       clim <- range(colvar, na.rm = TRUE)
     
-    Col <- variablecol(colvar, col, NAcol, clim) # generate color scheme
+    Col <- variablecol(colvar, col, NAcol, clim, breaks) # generate color scheme
 
     pltori <- plist$plt$ori
   } else {
@@ -551,9 +551,10 @@ flowpath <- function (u, v, x = NULL, y = NULL, startx = NULL, starty = NULL, ..
 quiver2Drgl <- function(u, v, x = NULL, y = NULL, colvar = NULL, ..., 
                     scale = 1, arr.max = 0.2, arr.min = 0, speed.max = NULL, 
                     by = NULL, type = "triangle", 
-                    col = NULL, NAcol = "white", 
+                    col = NULL, NAcol = "white", breaks = NULL,
                     mask = NULL, image = FALSE, contour = FALSE, 
-                    clim = NULL, add = FALSE, plot = TRUE) {
+                    colkey = NULL, clim = NULL, clab = NULL,
+                    add = FALSE, plot = TRUE) {
   if (is.null(x))
     x <- seq(0, 1, length.out = nrow(u))
   xlim <- range(x)
@@ -563,8 +564,8 @@ quiver2Drgl <- function(u, v, x = NULL, y = NULL, colvar = NULL, ...,
   
   F <- quiver2D(u, v, x, y, colvar, scale = scale, 
               arr.max = arr.max, arr.min = arr.min, speed.max = speed.max, 
-              by = by, plot = FALSE, col = col, NAcol = NAcol, 
-              clim = clim)
+              by = by, plot = FALSE, col = col, NAcol = NAcol, breaks = breaks,
+              colkey = colkey, clim = clim, clab = clab)
 
   arrows2Drgl(F$x0, F$y0, F$x1, F$y1, colvar = NULL, type = type, 
     col = F$col, NAcol = NAcol, add = add, code = 2, 

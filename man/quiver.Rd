@@ -23,7 +23,7 @@ quiver2D(u, ...)
            colvar = NULL, ..., 
            scale = 1, arr.max = 0.2, arr.min = 0, speed.max = NULL,  
            by = NULL, type = "triangle", col = NULL, NAcol = "white", 
-           colkey = NULL, mask = NULL, 
+           breaks = NULL, colkey = NULL, mask = NULL,
            image = FALSE, contour = FALSE, 
            clim = NULL, clab = NULL, 
            add = FALSE, plot = TRUE) 
@@ -33,9 +33,9 @@ quiver2D(u, ...)
 quiver2Drgl (u, v, x = NULL, y = NULL, colvar = NULL, ..., 
            scale = 1, arr.max = 0.2, arr.min = 0, speed.max = NULL, 
            by = NULL, type = "triangle", 
-           col = NULL, NAcol = "white",  
-           mask = NULL, image = FALSE, contour = FALSE, 
-           clim = NULL, add = FALSE, plot = TRUE)
+           col = NULL, NAcol = "white", breaks = NULL,
+           mask = NULL, image = FALSE, contour = FALSE,
+           colkey = NULL, clim = NULL, clab = NULL, add = FALSE, plot = TRUE)
 
 flowpath(u, v, x = NULL, y = NULL, startx = NULL, starty = NULL, ...,
            scale = 1, numarr = 0, arr.length = 0.2, maxstep = 1000, 
@@ -84,7 +84,11 @@ flowpath(u, v, x = NULL, y = NULL, startx = NULL, starty = NULL, ...,
     }
   \item{NAcol }{Colors to be used for \code{colvar} values that are \code{NA}.
     }
-  \item{scale }{Scaling factor for the arrows. 
+  \item{breaks }{a set of finite numeric breakpoints for the colors;
+    must have one more breakpoint than color and be in increasing order.
+    Unsorted vectors will be sorted, with a warning.
+    }
+  \item{scale }{Scaling factor for the arrows.
     When \code{scale = 1}, the longest arrow will fill a grid cell in 
       x- and y- direction. When \code{scale = 2}, it will be twice as long.
     }
@@ -289,10 +293,8 @@ flowpath(u, v, x = NULL, y = NULL, startx = NULL, starty = NULL, ...,
  v2 <- outer (x, y, function (x, y) sin(2*pi*x/10))
 
 # merge u, u2 and v, v2 to create an "array"
- U <- array(dim = c(dim(u2), 2), data = c(u, u2), 
-            dimnames = c("x", "y", "times"))
- V <- array(dim = c(dim(v2), 2), data = c(v, v2), 
-            dimnames = c("x", "y", "times"))
+ U <- array(dim = c(dim(u2), 2), data = c(u, u2))
+ V <- array(dim = c(dim(v2), 2), data = c(v, v2))
 
  quiver2D(u = U, v = V, x = x, y = y, main = c("time 1", "time 2"))
 

@@ -1,18 +1,19 @@
 # this code is not very efficient...
 
 vectorplot <- function(u, v, x = 0, y = 0, colvar = NULL, ..., 
-                       col = NULL, NAcol = "white", colkey = NULL, 
-                       by = 1, arr = FALSE, xfac = NULL, 
+                       col = NULL, NAcol = "white", breaks = NULL,
+                       colkey = NULL, by = 1, arr = FALSE, xfac = NULL,
                        clim = NULL, clab = NULL, add = FALSE) {
   
   dots <- splitpardots(list(...))
+  breaks <- check.breaks(breaks, col)
 
   if (!is.null(colvar)) {
     varlim <- clim
     if (is.null(varlim)) 
       varlim <- range(colvar, na.rm = TRUE)
 
-    if (is.null(col)) 
+    if (is.null(col))
       col <- jet.col(100)
     if (dots$clog) {
       colvar <- log(colvar)
@@ -24,7 +25,7 @@ vectorplot <- function(u, v, x = 0, y = 0, colvar = NULL, ...,
       stop("length of 'colvar' should be equal to length of 'u' and 'v'")
     if (is.null(clim)) 
       clim <- range(colvar, na.rm = TRUE)
-    Col <- variablecol(colvar, col, NAcol, clim)
+    Col <- variablecol(colvar, col, NAcol, clim, breaks)
   }
   else {
     Col <- col
