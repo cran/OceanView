@@ -199,7 +199,7 @@ splitobject <- function(ldots, x, xnames){
     
   if (length(ldots) > 0)
     for ( i in 1:length(ldots))
-      if ("matrix" %in% class(ldots[[i]]) | "data.frame" %in% class(ldots[[i]])) { 
+      if (inherits(ldots[[i]], "matrix" ) | inherits(ldots[[i]],"data.frame")) { 
         nother <- nother + 1        
         x2[[nother + 1]] <- ldots[[i]]
         if (is.null(ndots[i]))
@@ -208,8 +208,8 @@ splitobject <- function(ldots, x, xnames){
           names(x2)[nother+1] <- ndots[i]
         # a list of matrix objects
       } else if (is.list(ldots[[i]]) & 
-        ("matrix" %in% class(ldots[[i]][[1]]) | 
-         "data.frame" %in% class(ldots[[i]][[1]]))) {
+        (inherits(ldots[[i]][[1]],"matrix" ) | 
+         inherits(ldots[[i]][[1]],"data.frame"))) {
         for (j in 1:length(ldots[[i]])) {
           nother <- nother + 1        
           x2[[nother+1]] <- ldots[[i]][[j]]

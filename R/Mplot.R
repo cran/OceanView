@@ -21,11 +21,11 @@ Mcommon <- function (M, ..., verbose = FALSE) {
     return (list(M))
 
   if (is.list(M)) {   
-    if (! class(M[[1]]) %in% c("matrix", "data.frame"))
+    if (! inherits(M[[1]], c("matrix", "data.frame")))
       stop ("elements in list 'M' should be either a 'matrix' or 'data.frame' ")
     LL <- c(M, LL)
   } else {
-    if (! class(M) %in% c("matrix", "data.frame"))
+    if (! inherits(M, c("matrix", "data.frame")))
       stop ("'M' should be either a 'matrix' or 'data.frame' or a 'list'")
     LL <- c(list(M), LL)
    #dirty trick to get ALL names of ellipsis 
@@ -39,7 +39,7 @@ Mcommon <- function (M, ..., verbose = FALSE) {
   }
   cn <- Colnames(LL[[1]])
   for (i in 2:length(LL))  {
-    if (! class(LL[[i]]) %in% c("matrix", "data.frame"))
+    if (! inherits(LL[[i]], c("matrix", "data.frame")))
       stop ("elements in '...' should be either a 'matrix' or 'data.frame'")
     cn <- cn[cn %in% Colnames(LL[[i]])]
   }
@@ -469,7 +469,7 @@ splitdots <- function(ldots, x){
     
   if (length(ldots) > 0)
     for ( i in 1:length(ldots))
-      if ("matrix" %in% class(ldots[[i]]) | "data.frame" %in% class(ldots[[i]])) { 
+      if (inherits(ldots[[i]], "matrix") | inherits(ldots[[i]], "data.frame")) { 
         nother <- nother + 1        
         x2[[nother + 1]] <- ldots[[i]]
         if (is.null(ndots[i]))
@@ -478,8 +478,8 @@ splitdots <- function(ldots, x){
           names(x2)[nother+1] <- ndots[i]
         # a list of matrix objects
       } else if (is.list(ldots[[i]]) & 
-        ("matrix" %in% class(ldots[[i]][[1]]) | 
-         "data.frame" %in% class(ldots[[i]][[1]]))) {
+        (inherits(ldots[[i]][[1]],"matrix" )  | 
+         inherits(ldots[[i]][[1]],"data.frame") )) {
         for (j in 1:length(ldots[[i]])) {
           nother <- nother + 1        
           x2[[nother+1]] <- ldots[[i]][[j]]

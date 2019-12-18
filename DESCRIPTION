@@ -1,5 +1,5 @@
 Package: OceanView
-Version: 1.0.4
+Version: 1.0.5
 Title: Visualisation of Oceanographic Data and Model Output
 Author: Karline Soetaert <karline.soetaert@nioz.nl>
 Maintainer: Karline Soetaert <karline.soetaert@nioz.nl>
@@ -10,8 +10,8 @@ License: GPL (>= 3.0)
 LazyData: yes
 Repository: CRAN
 Repository/R-Forge/Project: plot3d
-Repository/R-Forge/Revision: 115
-Repository/R-Forge/DateTimeStamp: 2016-01-18 12:47:55
-Date/Publication: 2016-01-18 22:27:33
+Repository/R-Forge/Revision: 122
+Repository/R-Forge/DateTimeStamp: 2019-12-05 15:15:08
+Date/Publication: 2019-12-18 10:30:02 UTC
 NeedsCompilation: yes
-Packaged: 2016-01-18 13:05:58 UTC; rforge
+Packaged: 2019-12-05 15:31:06 UTC; rforge

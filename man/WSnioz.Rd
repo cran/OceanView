@@ -19,7 +19,7 @@
   The dataset \code{WSnioz.table} is in tabular format.
     
   The full dataset can be downloaded from:
-  \url{http://www.nioz.nl/monitoring-data-downloads}  
+  \code{https://www.nioz.nl/monitoring-data-downloads}  
 }
 
 \usage{
@@ -121,7 +121,7 @@ data(WSnioz.table)
 \references{
 Soetaert, K., Middelburg, JJ, Heip, C, Meire, P., Van Damme, S., Maris, T., 2006. Long-term change in dissolved inorganic nutrients in the heterotrophic Scheldt estuary (Belgium, the Netherlands). Limnology and Oceanography 51: 409-423.   DOI: 10.4319/lo.2006.51.1_part_2.0409
 
-  \url{http://aslo.org/lo/toc/vol_51/issue_1_part_2/0409.pdf}
+  \code{http://aslo.org/lo/toc/vol_51/issue_1_part_2/0409.pdf}
 }
 
 \seealso{
