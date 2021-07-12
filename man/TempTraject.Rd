@@ -12,7 +12,7 @@
   till \code{gtspp_103827_xb_111.nc}.
 
   These data were acquired from the US NOAA National Oceanographic Data Center 
-  (NODC) on 9/06/2012 from \url{http://www.nodc.noaa.gov/gtspp/}. 
+  (NODC) on 9/06/2012 from \url{https://www.nodc.noaa.gov/gtspp/}. 
 }
 
 \usage{
@@ -114,7 +114,7 @@ data(TrackProf)
 }
 
 \references{
-  \url{http://www.nodc.noaa.gov/gtspp/}
+  \url{https://www.nodc.noaa.gov/gtspp/}
 
   U.S. National Oceanographic Data Center: Global Temperature-Salinity Profile Programme.
   June 2006. U.S. Department of Commerce, National Oceanic and Atmosphere Administration,

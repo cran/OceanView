@@ -1,12 +1,6 @@
 \documentclass[article,nojss]{jss}
 \DeclareGraphicsExtensions{.pdf,.eps, .jpg, .png}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Add-on packages and fonts
-\usepackage{graphicx}
-\usepackage{amsmath}
-%\VignetteIndexEntry{OceanView: Visualising the output of a 3D hydrodynamical model}
-
-
 \newcommand{\noun}[1]{\textsc{#1}}
 %% Bold symbol macro for standard LaTeX users
 \providecommand{\boldsymbol}[1]{\mbox{\boldmath $#1$}}

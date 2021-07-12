@@ -176,7 +176,6 @@ North, E. W., E. E. Adams, S. Schlag, C. R. Sherwood, R. He, S. Socolofsky. 2011
 Simulating oil droplet dispersal from the Deepwater Horizon spill with a Lagrangian approach. 
 AGU Book Series: Monitoring and Modeling the Deepwater Horizon Oil Spill: A Record Breaking Enterprise.
 
-\url{http://northweb.hpl.umces.edu/LTRANS.htm}
 }
 
 \seealso{

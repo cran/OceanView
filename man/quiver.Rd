@@ -408,10 +408,10 @@ flowpath(u, v, x = NULL, y = NULL, startx = NULL, starty = NULL, ...,
 ## =============================================================================
 x <- 1:2
 y <- 1:3
-u <- matrix(1:6,2,3)
-v <- matrix(6:1,2,3)
- par(mfrow = c(1, 1))
+u <- matrix(data = 1:6, nrow = 2, ncol = 3)
+v <- matrix(data = 6:1, nrow = 2, ncol = 3)
 
+par(mfrow = c(1, 1))
 A <- quiver2D(x = x, y = y, u = u, v = v)
 B <- quiver2D(x = x, y = y[-1], u = u[,-1], v = v[,-1], col = 2, add = TRUE)
 C <- quiver2D(x = x, y = y[-3], u = u[,-3], v = v[,-3], col = 3, add = TRUE)

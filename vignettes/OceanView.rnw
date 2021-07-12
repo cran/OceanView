@@ -2,9 +2,6 @@
 \DeclareGraphicsExtensions{.pdf,.eps, .jpg, .png}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Add-on packages and fonts
-\usepackage{graphicx}
-\usepackage{amsmath}
-
 
 \newcommand{\noun}[1]{\textsc{#1}}
 %% Bold symbol macro for standard LaTeX users

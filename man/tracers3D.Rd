@@ -133,8 +133,8 @@
 ## =======================================================================
 
 # The topographic surface
- x <-  seq(-pi, pi, by = 0.2)
- y <-  seq(0, pi, by = 0.1)
+ x <- seq(-pi, pi, by = 0.2)
+ y <- seq(0, pi, by = 0.1)
  M <- mesh(x, y)
  z <- with(M, sin(x)*sin(y))
 
@@ -219,11 +219,11 @@
 
 \dontrun{
 # first create the data in matrices
- xp <- matrix(nrow = 200, ncol = nstep, data = xi) 
- yp <- matrix(nrow = 200, ncol = nstep,  data = yi) 
- zp <- matrix(nrow = 200, ncol = nstep, data = zi)
+ xp <- matrix(nrow = 200, ncol = nstep, data = rep(xi, times=nstep)) 
+ yp <- matrix(nrow = 200, ncol = nstep, data = rep(yi, times=nstep)) 
+ zp <- matrix(nrow = 200, ncol = nstep, data = rep(zi, times=nstep))
  tp <- matrix(nrow = 200, ncol = nstep, data = 0)
- cv <- matrix(nrow = 200, ncol = nstep, data = species)
+ cv <- matrix(nrow = 200, ncol = nstep, data = rep(species, times=nstep))
  nstep <- 10
  for (i in 2:nstep) {
    xp[,i] <- xp[,i-1] + 0.05 * rnorm(200) + 0.05

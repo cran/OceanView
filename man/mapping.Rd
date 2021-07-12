@@ -307,7 +307,7 @@ transectsigma(var = NULL, sigma, x, y, to, depth = NULL,
  }
 
 # extract specific values from 3-D data
- xyzto <- matrix(nrow = 2, data = c(1, 1, 1, 2, 2, 2), byrow = TRUE)
+ xyzto <- matrix(nrow = 2, ncol = 3, data = c(1,1,1,2,2,2), byrow = TRUE)
  extract(var = p, x, y, z, xyzto = xyzto)
 
 # a transect
@@ -374,14 +374,15 @@ transectsigma(var = NULL, sigma, x, y, to, depth = NULL,
 ## =======================================================================
 
  par(mfrow = c(2, 2))
- var <- t(matrix (nrow = 10, ncol = 10, data = 1:10))
+ var <- t(matrix (nrow = 10, ncol = 10, data = rep(1:10, times = 10)))
  image2D(var, ylab = "sigma", main = "values in sigma coordinates",
        clab = "var")
 
  # The depth at each 'column' 
  Depth <- approx(x = 1:5, y = c(10, 4, 5, 6, 4), 
                  xout = seq(1,5, length.out = 10))$y
-
+ Depth <- rep(Depth, times = 10)
+ 
 # Sigma coordinates
  sigma <- t(matrix(nrow = 10, ncol = 10, data = Depth, byrow = TRUE) * 
                 seq(from = 0, to = 1, length = 10))

@@ -60,14 +60,21 @@ changeres_xvec <- function(resfac, x, y, z, na.rm) {
 }
 
 changeres_xmat <- function(resfac, x, y, z, na.rm) { 
-
+# at least one of x or y is a matrix
   xx <- 1:nrow(z)
   yy <- 1:ncol(z)
-  XX <- changeres_xvec(resfac, xx, yy, x, na.rm)$var 
-  YY <- changeres_xvec(resfac, xx, yy, y, na.rm)$var
-  ZZ <- changeres_xvec(resfac, xx, yy, z, na.rm)$var
+  ZZ <- changeres_xvec(resfac, xx, yy, z, na.rm)
+  if (is.matrix(x)) 
+    XX <- changeres_xvec(resfac, xx, yy, x, na.rm)$var 
+  else
+    XX <- ZZ$x
+
+  if (is.matrix(y)) 
+    YY <- changeres_xvec(resfac, xx, yy, y, na.rm)$var 
+  else
+    YY <- ZZ$y
   
-  list(var = ZZ, x = XX, y = YY)
+  list(var = ZZ$var, x = XX, y = YY)
 }
 
 

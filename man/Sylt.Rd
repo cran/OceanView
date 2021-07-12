@@ -294,7 +294,7 @@ data(Sylt3D)
   Hans Burchard and Karsten Bolding, 2002. GETM, A General Estuarine Transport
   Model, Scientific Documentation. EUR 20253 EN. 
 
-  \url{http://www.getm.eu}
+  \url{https://getm.eu}
 
 }
 
