@@ -101,16 +101,16 @@ tracers3Drgl <- function(x, y, z, colvar = NULL, ...,
     ids <- plist$rgl$D
     if (! is.null(ids))
       if (!is.null(ids$main)) 
-        rgl.pop(type = "shapes", id = ids["main"])
+        pop3d(type = "shapes", id = ids["main"])
     M <- mtext3d(dots$main, "x++", line = 2)
     dots$main <- NULL
     plist$rgl$D$main <- M
   }
 
-  pp <- rgl.ids()
-#  rgl.pop(type = "shapes", id = pp[which(as.character(pp$type) == "spheres"),1])
+  pp <- ids3d()
+# pop3d(type = "shapes", id = pp[which(as.character(pp$type) == "spheres"),1])
 #  spheres3d(x, y, z, radius = cex * 0.0175 * plist$scalefac$expand, col = Col)
-  rgl.pop(type = "shapes", id = pp[which(as.character(pp$type) == "points"),1])
+  pop3d(type = "shapes", id = pp[which(as.character(pp$type) == "points"),1])
   plot3d(x = x, y = y, z = z,
                size = 6 *cex, col = Col, add = TRUE, alpha = alpha)
                

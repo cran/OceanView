@@ -14,7 +14,7 @@
   Karline Soetaert
 }
 \references{
-  \url{http://www.rforscience.com/rpackages/visualisation/oceanview/}
+  \url{https://www.rforscience.com/oceanview.html}
 }
 \seealso{
   \link{db2cross}, converts a dataset from database format to cross table.

@@ -1,5 +1,5 @@
 Package: OceanView
-Version: 1.0.6
+Version: 1.0.7
 Title: Visualisation of Oceanographic Data and Model Output
 Author: Karline Soetaert <karline.soetaert@nioz.nl>
 Maintainer: Karline Soetaert <karline.soetaert@nioz.nl>
@@ -9,6 +9,6 @@ Description: Functions for transforming and viewing 2-D and 3-D (oceanographic) 
 License: GPL (>= 3.0)
 LazyData: yes
 NeedsCompilation: yes
-Packaged: 2021-07-09 09:30:31 UTC; karlines
+Packaged: 2024-02-05 13:36:17 UTC; karlines
 Repository: CRAN
-Date/Publication: 2021-07-12 08:00:13 UTC
+Date/Publication: 2024-02-06 13:30:06 UTC

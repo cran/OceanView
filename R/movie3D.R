@@ -81,7 +81,7 @@ movieslice3D <- function(x, y, z, colvar = NULL, xs = NULL,
     ids <- plist$rgl$D
     if (! is.null(ids))
       if (!is.null(ids$main)) 
-        rgl.pop(type = "shapes", id = ids["main"])
+        pop3d(type = "shapes", id = ids["main"])
     M <- mtext3d(dots$main, "x++", line = 2)
     dots$main <- NULL
     plist$rgl$D$main <- M
@@ -105,7 +105,7 @@ movieslice3D <- function(x, y, z, colvar = NULL, xs = NULL,
    # colorvar 
     cv <- matrix(nrow = nrow(xs), ncol = ncol(xs), data = Col[cbind(ix, iy, iz)])
     if (popit) 
-      rgl.pop(id = 0)
+      pop3d(id = 0)
     popit <<- TRUE
     persp3d(xs, ys, zs, col = cv, add = TRUE, #aspect = FALSE, 
             front = "filled", back = "filled")#, smooth = smooth, alpha = fb$alpha)
@@ -123,7 +123,7 @@ movieslice3D <- function(x, y, z, colvar = NULL, xs = NULL,
     image.plane (M$x[,,], M$y[,,], M$z[,,], i = i) # [,,] to make sure it is an array
    if (! is.null(basename)) {
       filename <- paste(basename, formatC(as.integer(fi), width = 4, format = "d", flag = "0"),".png", sep="")
-      rgl.snapshot(filename) 
+      snapshot3d(filename) 
       fi <<- fi + 1
    } 
 
@@ -143,7 +143,7 @@ movieslice3D <- function(x, y, z, colvar = NULL, xs = NULL,
         add.plane(x, y, z.s, 3)
         
   if (popit) 
-    rgl.pop(id = 0)
+    pop3d(id = 0)
 
   setplist(plist)
 }
@@ -202,7 +202,7 @@ moviepoints3D <- function(x, y, z, colvar, t, by = 1,
       main = main[i]), dots))
     if (! is.null(basename)) {
       filename <- paste(basename, formatC(as.integer(i), width = 4, format = "d", flag = "0"),".png", sep="")      
-      rgl.snapshot(filename) 
+      snapshot3d(filename) 
     } 
     popit <- TRUE  
   }
@@ -216,7 +216,7 @@ addpoints <- function (x, y, z, Col, popit, main = NULL, ...)
     if (is.null(pch))
       pch <- "."
     if (popit) 
-      rgl.pop(id = 0)
+      pop3d(id = 0)
     if (is.null(cex)) 
         cex <- 1
     alpha <- dots$alpha
@@ -226,7 +226,7 @@ addpoints <- function (x, y, z, Col, popit, main = NULL, ...)
     if (!is.null(main)) {
         ids <- plist$rgl$D$main
         if (!is.null(ids)) 
-           rgl.pop(type = "shapes", id = ids)
+           pop3d(type = "shapes", id = ids)
         M <- mtext3d(main, "x++", line = 2)
         plist$rgl$D$main <- M
     }

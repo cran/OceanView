@@ -193,7 +193,7 @@ transectsigma(var = NULL, sigma, x, y, to, depth = NULL,
 
 \value{
   \code{remap.matrix}: 
-    \itemize{
+  
      \item{var }{The higher or lower resolution matrix 
           with dimension = c(length(xto), length(yto)).
           }
@@ -203,10 +203,9 @@ transectsigma(var = NULL, sigma, x, y, to, depth = NULL,
      \item{y }{The y coordinates, corresponding to second dimension of \code{var}
           (input argument \code{yto}).
           }
-    }
 
   \code{remap.array}: 
-    \itemize{
+
      \item{var }{The higher or lower resolution array, 
           with dimension = c(length(xto), length(yto), length(zto)).
           }
@@ -219,30 +218,27 @@ transectsigma(var = NULL, sigma, x, y, to, depth = NULL,
      \item{z }{The z coordinates, corresponding to third dimension of \code{var}
           (input argument \code{zto}).
           }
-    }
 
   \code{extract.matrix}:
-    \itemize{
+
      \item{var }{The higher or lower resolution object, 
           with dimension = c(nrow(xyto), dim(var)[3]).
           }
      \item{xy }{The pairs of (x,y) coordinates
           (input argument \code{xyto}).
           }
-    }
-  
+
   \code{extract.array}:
-    \itemize{
+
      \item{var }{The higher or lower resolution object, 
           with dimension = c(nrow(xyzto), dim(var)[3]).
           }
      \item{xyz }{The triplets of (x,y,z) coordinates
           (input argument \code{xyzto}).
           }
-    }
 
   \code{mapsigma}: 
-    \itemize{
+
      \item{var }{A matrix with columns in depth-coordinates.
           }
      \item{depth }{The depth-coordinates, also known as 'z'-coordinates, 
@@ -252,8 +248,8 @@ transectsigma(var = NULL, sigma, x, y, to, depth = NULL,
           }
      \item{y }{Only if \code{var} is an array, the 'y'-coordinates referring to the second dimension of \code{var}, except for the depth.
           }
-    }
 }
+
 \seealso{
   \link{Sylt3D} for other examples of mapping.
 

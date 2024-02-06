@@ -119,7 +119,7 @@ moviepersp <- function(z, x = NULL, y = NULL, t = NULL,
      Sys.sleep(wait)
     if (! is.null(basename)) {
       filename <- paste(basename, formatC(as.integer(fi), width = 4, format = "d", flag = "0"),".png", sep="")
-      rgl.snapshot(filename)
+      snapshot3d(filename)
       fi <- fi + 1
     }
   }
@@ -235,8 +235,8 @@ moviepersp3D <- function(z, x = NULL, y = NULL, t = NULL,
      do.call("persp3Drgl", c(alist(x = range(x), y = range(y), z = diag(zlim),
        col = col, breaks = breaks, add = add, clim = clim, new = new,
        main = "", zlim = zlim, colkey = colkey), dots))
-       rglids <- rgl.ids()
-       rgl.pop(id = rglids[1,1])
+       rglids <- ids3d()
+       pop3d(id = rglids[1,1])
 #     on.exit(par3d(save))
   idsmain <- getplist()$rgl$D$main
   }
@@ -246,10 +246,10 @@ moviepersp3D <- function(z, x = NULL, y = NULL, t = NULL,
      if (is.array(colvar))
        cv <- getval(Col, i)
     if (popit)
-      rgl.pop(id = 0)
+      pop3d(id = 0)
 
     if (! is.null(idsmain))
-        rgl.pop(type = "shapes", id = idsmain)
+        pop3d(type = "shapes", id = idsmain)
     idsmain <- mtext3d(main, "x++", line = 4)
     persp3d(x, y, z = getval(z, i), col = cv, add = TRUE, #aspect = FALSE,
             front = "filled", back = "filled")#, smooth = smooth, alpha = fb$alpha)
@@ -263,7 +263,7 @@ moviepersp3D <- function(z, x = NULL, y = NULL, t = NULL,
     }
     if (! is.null(basename)) {
       filename <- paste(basename, formatC(as.integer(fi), width = 4, format = "d", flag = "0"),".png", sep="")
-      rgl.snapshot(filename) 
+      snapshot3d(filename) 
       fi <- fi + 1
     }
   }
